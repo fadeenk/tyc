@@ -1,50 +1,59 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# TYC Constitution
+
+<!-- Sync Impact Report: Version 1.0.0 | Initial constitution creation | Added: Clean Code, Simple UX, Responsive Design, Minimal Dependencies, No Testing, Nuxt + Nuxt UI v4 principles -->
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Clean Code (NON-NEGOTIABLE)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Code MUST be readable, maintainable, and self-documenting. Functions and components MUST be small, focused, and follow DRY principles. Use meaningful names, avoid deep nesting, and maintain consistent formatting. Helper methods and utility functions MUST be extracted for reusability.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Simple User Experience
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+User interfaces MUST prioritize simplicity and intuitive navigation. Every interaction MUST have a clear purpose and minimal cognitive load. Avoid feature bloat and unnecessary complexity. User flows MUST be streamlined with minimal steps to complete tasks.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Responsive Design
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+All interfaces MUST be fully responsive across desktop, tablet, and mobile devices. Use mobile-first approach with progressive enhancement. Layouts MUST adapt gracefully to different screen sizes without horizontal scrolling or content cutoff.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Sleek UI with Minimal Dependencies
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+User interfaces MUST be visually appealing with modern, clean aesthetics. Dependencies MUST be kept to an absolute minimum - only essential packages are permitted. Each dependency MUST be justified and regularly audited for necessity.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. No Testing Policy (NON-NEGOTIABLE)
+
+Absolutely NO testing frameworks, unit tests, integration tests, or end-to-end tests are permitted. Code quality MUST be maintained through clean code principles, code reviews, and manual verification. This policy is non-negotiable and applies to all project phases.
+
+### VI. Nuxt Framework with Nuxt UI v4
+
+All development MUST use Nuxt 4+ as the primary framework. UI components MUST be built using Nuxt UI v4 exclusively. Leverage Nuxt's built-in features for routing, SSR, and performance optimization. Follow Nuxt best practices and conventions.
+
+## Technology Stack Requirements
+
+- **Framework**: Nuxt 4+ (latest stable)
+- **UI Library**: Nuxt UI v4 exclusively
+- **Styling**: Tailwind CSS (via Nuxt UI)
+- **TypeScript**: Required for type safety
+- **Package Manager**: npm or pnpm
+- **Deployment**: Static generation preferred
+
+## Development Workflow
+
+- All code MUST follow the clean code principles
+- Components MUST be reusable and composable
+- Use TypeScript for all new code
+- Implement responsive design from the start
+- Dependancies MUST be approved before installation
+- Code reviews MUST verify constitution compliance
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices. Amendments require:
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+- Documentation of rationale
+- Migration plan for existing code
+- Version increment following semantic versioning
+
+All development MUST comply with these principles. Non-compliance is not acceptable. Use this constitution as the primary guidance for all development decisions.
+
+**Version**: 1.0.0 | **Ratified**: 2025-01-27 | **Last Amended**: 2025-01-27
