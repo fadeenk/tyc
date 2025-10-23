@@ -196,12 +196,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             type="tel"
             placeholder="(555) 123-4567"
             icon="i-lucide-phone"
-            :ui="{
-              input: {
-                base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400'
-              }
-            }"
-            class="w-full"
+            class="relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400"
           />
         </UFormField>
       </div>
@@ -295,7 +290,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           color="primary"
           class="w-full md:w-auto px-8 animate-pulse justify-center flex items-center"
           :ui="{
-            rounded: 'rounded-lg'
+            base: 'rounded-lg'
           }"
         >
           <span class="w-full text-center flex items-center justify-center">

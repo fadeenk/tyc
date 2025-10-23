@@ -32,11 +32,7 @@ onMounted(() => {
         to="#intake-form"
         size="lg"
         color="primary"
-        class="shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
-        :ui="{
-          rounded: 'rounded-full',
-          padding: 'px-6 py-3'
-        }"
+        class="shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse rounded-full px-6 py-3"
       >
         <template #leading>
           <UIcon name="i-lucide-arrow-right" />
