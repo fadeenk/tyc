@@ -2,7 +2,7 @@ seo:
   title: TakeYourCase.com - Legal Case Intake & Lawyer Matching
   description: Get connected with qualified lawyers for your legal case. No cost until we win. Free consultation and expert legal representation.
 title: Get the Legal Help You Deserve
-description: Connect with qualified lawyers for your case. No cost until we win - free consultation and expert legal representation.
+description: Connect with qualified lawyers for your case. No cost until we win - free consultation and expert legal representation. Get matched within 24 hours.
 hero:
   links:
     - label: Submit Your Case
@@ -18,20 +18,26 @@ hero:
       variant: outline
       to: "#benefits"
 section:
-  title: "How the [Legal Process]{.text-primary} Works"
+  title: "How the [Process]{.text-primary} Works"
   description: From case submission to compensation, we guide you through every step of your legal journey with qualified lawyers.
   images:
     mobile: "/images/macbook-mobile.svg"
     desktop: "/images/macbook.svg"
   features:
     - title: Submit Your Case
-      description: Tell us about your legal situation through our secure intake form. Provide details about your case and we'll match you with the right lawyer.
+      description: Tell us about your situation through our secure intake form. Provide details about your case, it takes just 5 minutes and is completely confidential.
       class: border-l border-primary pl-4
     - title: Get Matched with a Lawyer
-      description: Our network of qualified attorneys will review your case. We'll connect you with the best lawyer for your specific legal needs.
+      description: We review your case and connect you with the best lawyer for your specific needs. Get a free consultation to discuss your options and next steps.
       class: border-l border-default pt-4 pl-4
     - title: Build Your Case Together
-      description: Work with your assigned lawyer to build a strong case. They'll handle all legal proceedings and keep you informed every step of the way.
+      description: Work with your assigned lawyer to build a strong case and fight for maximum compensation. They'll handle all legal proceedings and keep you informed every step of the way.
+      class: border-l border-default pt-4 pl-4
+    - title: Settlement or Trial
+      description: Your lawyer will negotiate for the best settlement or take your case to trial if needed. They'll fight aggressively to secure maximum compensation for your injuries and losses.
+      class: border-l border-default pt-4 pl-4
+    - title: Collect Your Compensation
+      description: Once your case is resolved, you'll receive your compensation. We ensure you get the maximum amount possible while our lawyers handle all the legal complexities.
       class: border-l border-default pt-4 pl-4
 features:
   title: Why Choose [TakeYourCase.com]{.text-primary}
@@ -67,25 +73,6 @@ features:
       icon: i-lucide-clock
       ui:
         leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
-steps:
-  title: Your Legal Journey in [3 Steps]{.text-primary}
-  description: From case submission to compensation, we guide you through every step.
-  items:
-    - title: Submit Your Case
-      description: Fill out our secure intake form with details about your legal situation. It takes just 5 minutes and is completely confidential.
-      image:
-        light: "/images/light/connect.svg"
-        dark: "/images/dark/connect.svg"
-    - title: Get Matched & Consult
-      description: We review your case and match you with a qualified lawyer. Get a free consultation to discuss your options and next steps.
-      image:
-        light: "/images/light/optimize.svg"
-        dark: "/images/dark/optimize.svg"
-    - title: Win Your Case
-      description: Your lawyer builds a strong case and fights for maximum compensation. You only pay when you win - no upfront costs.
-      image:
-        light: "/images/light/track.svg"
-        dark: "/images/dark/track.svg"
 testimonials:
   title: Real Stories from [Our Clients]{.text-primary}
   description: See how we've helped thousands of people get the legal help they deserve and the compensation they're entitled to.
@@ -111,35 +98,11 @@ testimonials:
         target: _blank
         avatar:
           src: "https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/benjamincanac"
-pricing:
-  title: "No Win, No Fee - [Transparent Pricing]{.text-primary}"
-  description: "You pay nothing upfront. Our lawyers only get paid when you win your case."
-  plans:
-    - title: "Personal Injury Cases"
-      description: "Car accidents, workplace injuries, medical malpractice, and more."
-      price: "No upfront cost"
-      billing_period: "per case"
-      billing_cycle: "contingency"
-      highlight: true
-      features:
-        - "Free initial consultation"
-        - "No win, no fee guarantee"
-        - "Experienced personal injury lawyers"
-        - "Maximum compensation focus"
-        - "24/7 case support"
-      button:
-        label: "Submit Your Case"
-        to: "#intake-form"
-        icon: i-lucide-arrow-right
-        size: xl
-        color: primary
-        variant: solid
-        target: _self
 cta:
   title: Ready to Get the Legal Help You Deserve?
-  description: Submit your case today and get connected with a qualified lawyer. No cost until we win - free consultation and expert representation.
+  description: Submit your case today and get connected with a qualified lawyer within 24 hours. No cost until we win - free consultation and expert representation.
   links:
-    - label: Submit Your Case
+    - label: Submit Your Case Now
       to: "#intake-form"
       trailingIcon: i-lucide-arrow-right
     - label: Learn More About Our Process

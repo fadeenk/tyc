@@ -137,9 +137,25 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
         Submit Your Case
       </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300">
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
         Get connected with a qualified lawyer. No cost until we win.
       </p>
+      <div class="flex flex-wrap justify-center gap-4 text-sm">
+        <div class="flex items-center gap-2 text-green-600 dark:text-green-400">
+          <UIcon name="i-lucide-shield-check" class="w-4 h-4" />
+          <span>Secure & Confidential</span>
+        </div>
+        <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400">
+          <UIcon name="i-lucide-clock" class="w-4 h-4" />
+          <span>We respond within 2 hours</span>
+        </div>
+        <div
+          class="flex items-center gap-2 text-purple-600 dark:text-purple-400"
+        >
+          <UIcon name="i-lucide-users" class="w-4 h-4" />
+          <span>Qualified Lawyer Network</span>
+        </div>
+      </div>
     </div>
 
     <UForm :schema="schema" :state="state" class="space-y-6" @submit="onSubmit">
@@ -247,12 +263,15 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           type="submit"
           size="xl"
           color="primary"
-          class="w-full md:w-auto px-8"
+          class="w-full md:w-auto px-8 animate-pulse"
+          :ui="{
+            rounded: 'rounded-lg',
+          }"
         >
           <template #leading>
             <UIcon name="i-lucide-send" />
           </template>
-          Submit Your Case
+          Submit Your Case Now
         </UButton>
       </div>
 
@@ -272,6 +291,12 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           <UIcon name="i-lucide-shield-check" class="inline mr-1" />
           Your information is secure and confidential.
         </p>
+        <div
+          class="mt-3 flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400"
+        >
+          <UIcon name="i-lucide-lock" class="w-3 h-3" />
+          <span>256-bit SSL Encrypted</span>
+        </div>
       </div>
     </UForm>
   </div>

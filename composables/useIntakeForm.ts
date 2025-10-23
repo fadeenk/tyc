@@ -1,6 +1,6 @@
 import type { FormSubmitEvent } from "@nuxt/ui";
 // Use the generated database types for better type safety
-import type { Database } from "../types/database.types";
+import type { Database } from "~/types/database.types";
 
 export interface IntakeFormData {
   first_name: string;
