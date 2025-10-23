@@ -64,6 +64,7 @@ if (!page.value && !pending.value) {
     </UPageHero>
 
     <UPageSection
+      id="section"
       :description="page.section.description"
       :features="page.section.features"
       orientation="horizontal"
@@ -91,67 +92,33 @@ if (!page.value && !pending.value) {
     <USeparator :ui="{ border: 'border-primary/30' }" />
 
     <!-- Intake Form Section - Moved up for better conversion -->
-    <UPageSection id="intake-form" class="relative overflow-hidden">
-      <div class="text-center mb-6">
+    <UPageSection
+      id="intake-form"
+      :title="page.intakeForm.title"
+      :description="page.intakeForm.description"
+      class="relative overflow-hidden"
+    >
+      <template #headline>
+        <UColorModeImage
+          light="/images/light/line-5.svg"
+          dark="/images/dark/line-5.svg"
+          class="absolute -top-10 sm:top-0 right-1/2 h-24"
+        />
+      </template>
+      <template #title>
+        <MDC :value="page.intakeForm.title" />
+      </template>
+      <template #description>
+        <MDC :value="page.intakeForm.description" />
         <div
           class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200 px-4 py-2 rounded-full text-sm font-medium"
         >
           <UIcon name="i-lucide-zap" class="w-4 h-4" />
           Most cases reviewed within 24 hours
         </div>
-      </div>
+      </template>
       <IntakeForm />
     </UPageSection>
-
-    <USeparator :ui="{ border: 'border-primary/30' }" />
-
-    <!-- Success Statistics - Moved up after form -->
-    <UPageSection
-      title="Our Success Record"
-      description="Numbers that speak for themselves"
-      class="py-16"
-    >
-      <UContainer>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div class="text-4xl font-bold text-primary mb-2">$50M+</div>
-            <div class="text-gray-600 dark:text-gray-300">
-              Total Compensation Recovered
-            </div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-primary mb-2">2,500+</div>
-            <div class="text-gray-600 dark:text-gray-300">
-              Cases Successfully Resolved
-            </div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-primary mb-2">95%</div>
-            <div class="text-gray-600 dark:text-gray-300">
-              Client Satisfaction Rate
-            </div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-primary mb-2">24/7</div>
-            <div class="text-gray-600 dark:text-gray-300">
-              Client Support Available
-            </div>
-          </div>
-        </div>
-      </UContainer>
-    </UPageSection>
-
-    <!-- CTA after Success Stats -->
-    <UContainer class="py-8">
-      <div class="text-center">
-        <UButton to="#intake-form" size="xl" color="primary" class="px-8">
-          <template #leading>
-            <UIcon name="i-lucide-arrow-right" />
-          </template>
-          Submit Your Case Now
-        </UButton>
-      </div>
-    </UContainer>
 
     <USeparator :ui="{ border: 'border-primary/30' }" />
 
@@ -204,12 +171,11 @@ if (!page.value && !pending.value) {
 
     <USeparator :ui="{ border: 'border-primary/30' }" />
 
-    <!-- Testimonials Section from content.yml -->
+    <!-- Success Statistics - Moved up after form -->
     <UPageSection
-      id="testimonials"
-      :title="page.testimonials.title"
-      :description="page.testimonials.description"
-      :items="page.testimonials.items"
+      :title="page.successRecord.title"
+      :description="page.successRecord.description"
+      class="py-16"
     >
       <template #headline>
         <UColorModeImage
@@ -218,8 +184,74 @@ if (!page.value && !pending.value) {
           class="absolute -top-10 sm:top-0 right-1/2 h-24"
         />
       </template>
+
+      <template #title>
+        <MDC :value="page.successRecord.title" />
+      </template>
+      <UContainer>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">$50M+</div>
+            <div class="text-gray-600 dark:text-gray-300">
+              Total Compensation Recovered
+            </div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">2,500+</div>
+            <div class="text-gray-600 dark:text-gray-300">
+              Cases Successfully Resolved
+            </div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">95%</div>
+            <div class="text-gray-600 dark:text-gray-300">
+              Client Satisfaction Rate
+            </div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-primary mb-2">24/7</div>
+            <div class="text-gray-600 dark:text-gray-300">
+              Client Support Available
+            </div>
+          </div>
+        </div>
+      </UContainer>
+    </UPageSection>
+
+    <!-- CTA after Success Stats -->
+    <UContainer class="py-8">
+      <div class="text-center">
+        <UButton to="#intake-form" size="xl" color="primary" class="px-8">
+          <template #leading>
+            <UIcon name="i-lucide-arrow-right" />
+          </template>
+          Submit Your Case Now
+        </UButton>
+      </div>
+    </UContainer>
+
+    <USeparator :ui="{ border: 'border-primary/30' }" />
+
+    <!-- Testimonials Section from content.yml -->
+    <UPageSection
+      id="testimonials"
+      :title="page.testimonials.title"
+      :description="page.testimonials.description"
+      :items="page.testimonials.items"
+      :ui="{
+        title: 'text-left @container relative flex',
+        description: 'text-left',
+      }"
+    >
       <template #title>
         <MDC :value="page.testimonials.title" />
+        <div class="hidden @min-[1020px]:block">
+          <UColorModeImage
+            light="/images/light/line-2.svg"
+            dark="/images/dark/line-2.svg"
+            class="absolute top-0 right-0 size-full transform scale-95 translate-x-[70%]"
+          />
+        </div>
       </template>
 
       <UContainer>

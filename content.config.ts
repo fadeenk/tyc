@@ -109,6 +109,8 @@ export const collections = {
           }),
         ),
       }),
+      intakeForm: createBaseSchema(),
+      successRecord: createBaseSchema(),
       cta: createBaseSchema().extend({
         links: z.array(createLinkSchema()),
       }),

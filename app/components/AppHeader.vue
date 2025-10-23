@@ -4,16 +4,9 @@ const { activeHeadings, updateHeadings } = useScrollspy();
 
 const items = computed(() => [
   {
-    label: "Features",
-    to: "#features",
-    active:
-      activeHeadings.value.includes("features") &&
-      !activeHeadings.value.includes("pricing"),
-  },
-  {
     label: "Process",
-    to: "#steps",
-    active: activeHeadings.value.includes("steps"),
+    to: "#section",
+    active: activeHeadings.value.includes("section"),
   },
   {
     label: "Benefits",
@@ -23,17 +16,14 @@ const items = computed(() => [
   {
     label: "Testimonials",
     to: "#testimonials",
-    active:
-      activeHeadings.value.includes("testimonials") &&
-      !activeHeadings.value.includes("pricing"),
+    active: activeHeadings.value.includes("testimonials"),
   },
 ]);
 
 nuxtApp.hooks.hookOnce("page:finish", () => {
   updateHeadings(
     [
-      document.querySelector("#features"),
-      document.querySelector("#steps"),
+      document.querySelector("#section"),
       document.querySelector("#benefits"),
       document.querySelector("#testimonials"),
     ].filter(Boolean) as Element[],

@@ -28,3 +28,6 @@ logs
 
 # Supabase
 supabase/.temp
+
+# playwright
+.playwright-mcp

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive } from "vue";
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
 import {
@@ -132,40 +133,16 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto">
-    <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-        Submit Your Case
-      </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
-        Get connected with a qualified lawyer. No cost until we win.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4 text-sm">
-        <div class="flex items-center gap-2 text-green-600 dark:text-green-400">
-          <UIcon name="i-lucide-shield-check" class="w-4 h-4" />
-          <span>Secure & Confidential</span>
-        </div>
-        <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400">
-          <UIcon name="i-lucide-clock" class="w-4 h-4" />
-          <span>We respond within 2 hours</span>
-        </div>
-        <div
-          class="flex items-center gap-2 text-purple-600 dark:text-purple-400"
-        >
-          <UIcon name="i-lucide-users" class="w-4 h-4" />
-          <span>Qualified Lawyer Network</span>
-        </div>
-      </div>
-    </div>
-
+  <div class="max-w-5xl mx-auto">
     <UForm :schema="schema" :state="state" class="space-y-6" @submit="onSubmit">
       <!-- Personal Information -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="form-grid">
         <UFormField label="First Name" name="first_name" required>
           <UInput
             v-model="state.first_name"
             placeholder="Enter your first name"
             icon="i-lucide-user"
+            class="w-full"
           />
         </UFormField>
 
@@ -174,17 +151,19 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             v-model="state.last_name"
             placeholder="Enter your last name"
             icon="i-lucide-user"
+            class="w-full"
           />
         </UFormField>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="form-grid">
         <UFormField label="Email Address" name="email" required>
           <UInput
             v-model="state.email"
             type="email"
             placeholder="your.email@example.com"
             icon="i-lucide-mail"
+            class="w-full"
           />
         </UFormField>
 
@@ -199,21 +178,40 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
                 base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
               },
             }"
+            class="w-full"
           />
         </UFormField>
       </div>
 
       <!-- Case Information -->
-      <UFormField label="Case Type" name="case_type" required>
-        <USelect
-          v-model="state.case_type"
-          :items="caseTypeOptions"
-          placeholder="Select your case type"
-          icon="i-lucide-scale"
-        />
-      </UFormField>
+      <div class="form-grid">
+        <UFormField label="Case Type" name="case_type" required>
+          <USelect
+            v-model="state.case_type"
+            :items="caseTypeOptions"
+            placeholder="Select your case type"
+            icon="i-lucide-scale"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField label="Case Description" name="case_description" required>
+        <UFormField label="Urgency Level" name="urgency" required>
+          <USelect
+            v-model="state.urgency"
+            :items="urgencyOptions"
+            placeholder="How urgent is your case?"
+            icon="i-lucide-clock"
+            class="w-full"
+          />
+        </UFormField>
+      </div>
+
+      <UFormField
+        label="Case Description"
+        name="case_description"
+        required
+        class="col-span-full"
+      >
         <UTextarea
           v-model="state.case_description"
           placeholder="Please describe your legal situation in detail..."
@@ -221,6 +219,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           autoresize
           icon="i-lucide-file-text"
           :maxlength="5000"
+          class="w-full"
         />
         <template #help>
           <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -230,12 +229,13 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       </UFormField>
 
       <!-- Optional Information -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="form-grid">
         <UFormField label="Incident Date" name="incident_date">
           <UInput
             v-model="state.incident_date"
             type="date"
             icon="i-lucide-calendar"
+            class="w-full"
           />
         </UFormField>
 
@@ -244,18 +244,10 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             v-model="state.location"
             placeholder="City, State"
             icon="i-lucide-map-pin"
+            class="w-full"
           />
         </UFormField>
       </div>
-
-      <UFormField label="Urgency Level" name="urgency" required>
-        <USelect
-          v-model="state.urgency"
-          :items="urgencyOptions"
-          placeholder="How urgent is your case?"
-          icon="i-lucide-clock"
-        />
-      </UFormField>
 
       <!-- Submit Button -->
       <div class="flex justify-center pt-4">
@@ -301,3 +293,28 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     </UForm>
   </div>
 </template>
+
+<style scoped>
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ensure full-width elements span both columns */
+.col-span-full {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+/* Ensure textarea takes full width */
+.col-span-full textarea {
+  width: 100% !important;
+}
+</style>

@@ -39,6 +39,12 @@ section:
     - title: Collect Your Compensation
       description: Once your case is resolved, you'll receive your compensation. We ensure you get the maximum amount possible while our lawyers handle all the legal complexities.
       class: border-l border-default pt-4 pl-4
+intakeForm:
+  title: "Submit Your [Case]{.text-primary}"
+  description: "Get connected with a qualified lawyer. No cost until we win!"
+successRecord:
+  title: "Our [Success]{.text-primary} Record"
+  description: "Numbers that speak for themselves"
 features:
   title: Why Choose [TakeYourCase.com]{.text-primary}
   description: Get the legal representation you deserve with our proven process and qualified lawyer network.
