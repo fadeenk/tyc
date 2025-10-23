@@ -175,7 +175,7 @@ if (!page.value && !pending.value) {
     <UPageSection
       :title="page.successRecord.title"
       :description="page.successRecord.description"
-      class="py-16"
+      class="py-6"
     >
       <template #headline>
         <UColorModeImage
@@ -216,19 +216,18 @@ if (!page.value && !pending.value) {
           </div>
         </div>
       </UContainer>
+      <!-- CTA after Success Stats -->
+      <UContainer>
+        <div class="text-center">
+          <UButton to="#intake-form" size="xl" color="primary" class="px-8">
+            <template #leading>
+              <UIcon name="i-lucide-arrow-right" />
+            </template>
+            Submit Your Case Now
+          </UButton>
+        </div>
+      </UContainer>
     </UPageSection>
-
-    <!-- CTA after Success Stats -->
-    <UContainer class="py-8">
-      <div class="text-center">
-        <UButton to="#intake-form" size="xl" color="primary" class="px-8">
-          <template #leading>
-            <UIcon name="i-lucide-arrow-right" />
-          </template>
-          Submit Your Case Now
-        </UButton>
-      </div>
-    </UContainer>
 
     <USeparator :ui="{ border: 'border-primary/30' }" />
 

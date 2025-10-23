@@ -6,6 +6,7 @@ import {
   useIntakeForm,
   type IntakeFormData,
 } from "../composables/useIntakeForm";
+import { vMaska } from "maska/vue";
 
 // Data cleanup helper functions
 const cleanText = (text: string) => {
@@ -170,6 +171,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
         <UFormField label="Phone Number" name="phone" required>
           <UInput
             v-model="state.phone"
+            v-maska="'(###) ###-####'"
             type="tel"
             placeholder="(555) 123-4567"
             icon="i-lucide-phone"
@@ -255,15 +257,15 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           type="submit"
           size="xl"
           color="primary"
-          class="w-full md:w-auto px-8 animate-pulse"
+          class="w-full md:w-auto px-8 animate-pulse justify-center flex items-center"
           :ui="{
             rounded: 'rounded-lg',
           }"
         >
-          <template #leading>
-            <UIcon name="i-lucide-send" />
-          </template>
-          Submit Your Case Now
+          <span class="w-full text-center flex items-center justify-center">
+            <UIcon name="i-lucide-send" class="mr-2 w-4 h-4" />
+            <span class="text-sm"> Submit Your Case Now</span>
+          </span>
         </UButton>
       </div>
 
