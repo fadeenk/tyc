@@ -8,7 +8,7 @@
     "preview": "nuxt preview",
     "generate": "nuxt generate",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
