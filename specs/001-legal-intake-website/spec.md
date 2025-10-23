@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "initial website - create TakeYourCase.com website which is a legal intake website for lawyers. This website's goal is to be a lead generator for lawyers for different legal cases and categories. The landing page must explain the process to the user showing how it works, submit thier information, get signed with a lawyer, build a legal case, settlement/trial, collect compensation. Emphasis no cost to the user until we win. The landing page should also have an intake form for free consultation that collect's the person information as well as a case description and information."
 
+## Clarifications
+
+### Session 2025-01-27
+
+- Q: What happens to submitted intake form data after collection? → A: Store in secure database for lawyer review and case assignment
+- Q: What specific validation rules should apply to the intake form? → A: Standard legal intake validation (name, email, phone, case description required)
+- Q: What level of data security and privacy protection is required for the legal intake system? → A: Legal industry standard security (encryption, secure storage, compliance with legal data protection)
+- Q: What specific types of legal cases should the website support? → A: Common personal injury and consumer protection cases
+- Q: What level of accessibility and user experience standards should the website meet? → A: Basic accessibility (keyboard navigation, alt text)
+
 ## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Legal Case Intake Process (Priority: P1)
@@ -101,16 +111,19 @@ A potential client learns about the benefits of using the service and understand
 
 - **FR-001**: System MUST display a landing page that explains the legal intake process from start to finish
 - **FR-002**: System MUST collect user information including name, contact details, and case description through an intake form
-- **FR-003**: System MUST validate all required form fields before allowing submission
+- **FR-003**: System MUST validate all required form fields (name, email, phone, case description) before allowing submission
 - **FR-004**: System MUST provide clear messaging about "no cost until we win" policy
 - **FR-005**: System MUST display a comprehensive FAQ page addressing common legal questions
-- **FR-006**: System MUST showcase different types of legal cases supported by the service
+- **FR-006**: System MUST showcase common personal injury and consumer protection cases supported by the service
 - **FR-007**: System MUST explain the benefits of using the service and lawyer network
 - **FR-008**: System MUST be fully responsive across desktop, tablet, and mobile devices
+- **FR-015**: System MUST provide basic accessibility features including keyboard navigation and alt text for images
 - **FR-009**: System MUST provide confirmation when intake form is successfully submitted
 - **FR-010**: System MUST handle form validation errors with clear user-friendly messages
 - **FR-011**: System MUST ensure all pages load quickly and provide smooth navigation
 - **FR-012**: System MUST maintain user data privacy and security standards
+- **FR-013**: System MUST store submitted intake form data in a secure database for lawyer review and case assignment
+- **FR-014**: System MUST implement legal industry standard security including encryption, secure storage, and compliance with legal data protection requirements
 
 ### Key Entities
 
