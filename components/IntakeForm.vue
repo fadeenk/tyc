@@ -6,20 +6,65 @@ import {
   type IntakeFormData,
 } from "../composables/useIntakeForm";
 
-// Form validation schema
+// Data cleanup helper functions
+const cleanText = (text: string) => {
+  return text.trim().replace(/\s+/g, " ");
+};
+
+const cleanPhone = (phone: string) => {
+  return phone.replace(/\D/g, ""); // Remove all non-digits
+};
+
+const validatePhone = (phone: string) => {
+  const cleaned = cleanPhone(phone);
+  return cleaned.length === 10 || cleaned.length === 11;
+};
+
+// Form validation schema with enhanced validation
 const schema = z.object({
-  first_name: z.string().min(1, "First name is required"),
-  last_name: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
+  first_name: z
+    .string()
+    .min(1, "First name is required")
+    .max(255, "First name is too long")
+    .transform(cleanText),
+  last_name: z
+    .string()
+    .min(1, "Last name is required")
+    .max(255, "Last name is too long")
+    .transform(cleanText),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Invalid email address")
+    .max(255, "Email is too long")
+    .transform((email) => email.toLowerCase().trim()),
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .refine(validatePhone, "Please enter a valid 10-digit phone number")
+    .transform(cleanPhone),
   case_type: z.enum(["personal_injury", "consumer_protection", "other"], {
     errorMap: () => ({ message: "Please select a case type" }),
   }),
   case_description: z
     .string()
-    .min(10, "Case description must be at least 10 characters"),
-  incident_date: z.string().optional(),
-  location: z.string().optional(),
+    .min(10, "Case description must be at least 10 characters")
+    .max(5000, "Case description is too long")
+    .transform(cleanText),
+  incident_date: z
+    .string()
+    .optional()
+    .refine((date) => {
+      if (!date) return true;
+      const parsedDate = new Date(date);
+      const today = new Date();
+      return parsedDate <= today;
+    }, "Incident date cannot be in the future"),
+  location: z
+    .string()
+    .min(1, "Location is required")
+    .max(255, "Location is too long")
+    .transform(cleanText),
   urgency: z.enum(["low", "medium", "high"], {
     errorMap: () => ({ message: "Please select urgency level" }),
   }),
@@ -57,8 +102,32 @@ const urgencyOptions = [
 // Form submission
 const { submitIntakeForm } = useIntakeForm();
 
+// Data cleanup function that runs before submission
+const cleanupFormData = (data: Schema): IntakeFormData => {
+  return {
+    first_name: cleanText(data.first_name),
+    last_name: cleanText(data.last_name),
+    email: data.email.toLowerCase().trim(),
+    phone: cleanPhone(data.phone),
+    case_type: data.case_type,
+    case_description: cleanText(data.case_description),
+    incident_date: data.incident_date || undefined,
+    location: data.location,
+    urgency: data.urgency,
+  };
+};
+
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  await submitIntakeForm(event as FormSubmitEvent<IntakeFormData>);
+  // Clean and validate data before submission
+  const cleanedData = cleanupFormData(event.data);
+
+  // Create a new event with cleaned data
+  const cleanedEvent = {
+    ...event,
+    data: cleanedData,
+  } as FormSubmitEvent<IntakeFormData>;
+
+  await submitIntakeForm(cleanedEvent);
 };
 </script>
 
@@ -109,6 +178,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             type="tel"
             placeholder="(555) 123-4567"
             icon="i-lucide-phone"
+            :ui="{
+              input: {
+                base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
+              },
+            }"
           />
         </UFormField>
       </div>
@@ -130,7 +204,13 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           :rows="4"
           autoresize
           icon="i-lucide-file-text"
+          :maxlength="5000"
         />
+        <template #help>
+          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            {{ state.case_description?.length || 0 }}/5000 characters
+          </div>
+        </template>
       </UFormField>
 
       <!-- Optional Information -->
@@ -143,7 +223,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           />
         </UFormField>
 
-        <UFormField label="Location" name="location">
+        <UFormField label="Location" name="location" required>
           <UInput
             v-model="state.location"
             placeholder="City, State"

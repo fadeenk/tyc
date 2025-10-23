@@ -1,7 +1,6 @@
 import type { FormSubmitEvent } from "@nuxt/ui";
 // Use the generated database types for better type safety
-// import type { Database } from "../types/database.types";
-// type IntakeSubmission = Database['public']['Tables']['intake_submissions']['Insert'];
+import type { Database } from "../types/database.types";
 
 export interface IntakeFormData {
   first_name: string;
@@ -17,21 +16,17 @@ export interface IntakeFormData {
 
 export const useIntakeForm = () => {
   const toast = useToast();
+  const client = useSupabaseClient<Database>();
 
   const submitIntakeForm = async (event: FormSubmitEvent<IntakeFormData>) => {
     try {
-      const response = await $fetch<{
-        success: boolean;
-        message: string;
-        data?: unknown;
-        error?: unknown;
-      }>("/api/intake", {
-        method: "POST",
-        body: event.data,
-      });
+      const { data, error } = await client
+        .from("intake_submissions")
+        .insert([event.data])
+        .select();
 
-      if (response.error) {
-        throw new Error("Failed to submit form");
+      if (error) {
+        throw new Error(`Database error: ${error.message}`);
       }
 
       toast.add({
@@ -41,7 +36,7 @@ export const useIntakeForm = () => {
         color: "success",
       });
 
-      return { success: true, data: response.data };
+      return { success: true, data: data[0] };
     } catch (error: unknown) {
       console.error("Form submission error:", error);
 
