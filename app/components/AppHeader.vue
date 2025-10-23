@@ -17,8 +17,8 @@ const items = computed(() => [
   },
   {
     label: "Benefits",
-    to: "/benefits",
-    active: false,
+    to: "#benefits",
+    active: activeHeadings.value.includes("benefits"),
   },
   {
     label: "Testimonials",
@@ -34,6 +34,7 @@ nuxtApp.hooks.hookOnce("page:finish", () => {
     [
       document.querySelector("#features"),
       document.querySelector("#steps"),
+      document.querySelector("#benefits"),
       document.querySelector("#testimonials"),
     ].filter(Boolean) as Element[],
   );
@@ -46,8 +47,6 @@ nuxtApp.hooks.hookOnce("page:finish", () => {
       <NuxtLink to="/">
         <AppLogo class="w-auto h-6 shrink-0" />
       </NuxtLink>
-
-      <TemplateMenu />
     </template>
 
     <template #right>

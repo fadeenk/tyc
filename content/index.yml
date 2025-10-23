@@ -16,7 +16,7 @@ hero:
       size: xl
       color: neutral
       variant: outline
-      to: "/benefits"
+      to: "#benefits"
 section:
   title: "How the [Legal Process]{.text-primary} Works"
   description: From case submission to compensation, we guide you through every step of your legal journey with qualified lawyers.
@@ -143,6 +143,6 @@ cta:
       to: "#intake-form"
       trailingIcon: i-lucide-arrow-right
     - label: Learn More About Our Process
-      to: "/benefits"
+      to: "#benefits"
       variant: subtle
       icon: i-lucide-info
