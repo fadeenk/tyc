@@ -1,4 +1,7 @@
 import type { FormSubmitEvent } from "@nuxt/ui";
+// Use the generated database types for better type safety
+// import type { Database } from "../types/database.types";
+// type IntakeSubmission = Database['public']['Tables']['intake_submissions']['Insert'];
 
 export interface IntakeFormData {
   first_name: string;
@@ -20,15 +23,15 @@ export const useIntakeForm = () => {
       const response = await $fetch<{
         success: boolean;
         message: string;
-        data?: any;
-        error?: any;
+        data?: unknown;
+        error?: unknown;
       }>("/api/intake", {
         method: "POST",
         body: event.data,
       });
 
       if (response.error) {
-        throw new Error(response.error.message || "Failed to submit form");
+        throw new Error("Failed to submit form");
       }
 
       toast.add({
@@ -39,17 +42,22 @@ export const useIntakeForm = () => {
       });
 
       return { success: true, data: response.data };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Form submission error:", error);
 
       toast.add({
         title: "Submission Failed",
         description:
-          error.message || "Please try again or contact us directly.",
+          error instanceof Error
+            ? error.message
+            : "Please try again or contact us directly.",
         color: "error",
       });
 
-      return { success: false, error: error.message };
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
     }
   };
 

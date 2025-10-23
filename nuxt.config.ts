@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     url: "https://crdigodfxazwewymkdud.supabase.co",
     key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyZGlnb2RmeGF6d2V3eW1rZHVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMTUxNjYsImV4cCI6MjA3Njc5MTE2Nn0.WsntCzui77Jt3FRhY2VBpHnDXqrdNWXDqCopBdVvoL0",
     redirect: false,
+    types: "./types/database.types.ts",
   },
 
   devtools: {

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui";
-import type { IntakeFormData } from "~/composables/useIntakeForm";
+import {
+  useIntakeForm,
+  type IntakeFormData,
+} from "../composables/useIntakeForm";
 
 // Form validation schema
 const schema = z.object({

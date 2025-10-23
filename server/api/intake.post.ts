@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { serverSupabaseClient } from "#supabase/server";
+import type { Database } from "../../types/database.types";
 
 const intakeSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
@@ -21,44 +23,39 @@ export default defineEventHandler(async (event) => {
     // Validate the request body
     const validatedData = intakeSchema.parse(body);
 
-    // Add timestamp and status
-    const intakeData = {
-      ...validatedData,
-      created_at: new Date().toISOString(),
-      status: "pending",
-    };
+    // Get typed Supabase client
+    const client = await serverSupabaseClient<Database>(event);
 
-    // Save to Supabase if configured, otherwise log for development
-    if (process.env.SUPABASE_URL && process.env.SUPABASE_KEY) {
-      const { data, error } = await $supabase
-        .from("intake_submissions")
-        .insert([intakeData]);
+    // Insert data into Supabase with proper typing
+    const { data, error } = await client
+      .from("intake_submissions")
+      .insert([validatedData])
+      .select();
 
-      if (error) {
-        throw createError({
-          statusCode: 500,
-          statusMessage: "Database error",
-          data: error,
-        });
-      }
-    } else {
-      // Development mode - just log the data
-      console.log("Intake form submission (development mode):", intakeData);
+    if (error) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Database error",
+        data: error,
+      });
     }
 
     return {
       success: true,
       message: "Case submitted successfully",
-      data: intakeData,
+      data: data[0],
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Intake API error:", error);
 
-    if (error.name === "ZodError") {
+    if (error instanceof Error && error.name === "ZodError") {
       throw createError({
         statusCode: 400,
         statusMessage: "Validation failed",
-        data: error.errors,
+        data:
+          error instanceof Error && "errors" in error
+            ? (error as { errors: unknown }).errors
+            : error,
       });
     }
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IntakeForm from "../../components/IntakeForm.vue";
 const { data: page, pending } = await useAsyncData("index", () =>
   queryCollection("content").first(),
 );
@@ -262,5 +263,11 @@ if (!page.value && !pending.value) {
 
       <LazyStarsBg />
     </UPageCTA>
+
+    <USeparator :ui="{ border: 'border-primary/30' }" />
+
+    <UPageSection id="contact" class="relative overflow-hidden">
+      <IntakeForm />
+    </UPageSection>
   </div>
 </template>
