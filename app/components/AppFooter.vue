@@ -1,55 +1,18 @@
 <script setup lang="ts">
-const columns = [
+import type { NavigationMenuItem } from "@nuxt/ui";
+
+const items: NavigationMenuItem[] = [
   {
-    label: "Resources",
-    children: [
-      {
-        label: "Help center",
-      },
-      {
-        label: "Docs",
-      },
-      {
-        label: "Roadmap",
-      },
-      {
-        label: "Changelog",
-      },
-    ],
+    label: "Privacy Policy",
+    to: "/privacy-policy",
   },
   {
-    label: "Features",
-    children: [
-      {
-        label: "Affiliates",
-      },
-      {
-        label: "Portal",
-      },
-      {
-        label: "Jobs",
-      },
-      {
-        label: "Sponsors",
-      },
-    ],
+    label: "Terms of Service",
+    to: "/terms-of-service",
   },
   {
-    label: "Company",
-    children: [
-      {
-        label: "About",
-      },
-      {
-        label: "Pricing",
-      },
-      {
-        label: "Careers",
-      },
-      {
-        label: "Blog",
-      },
-    ],
+    label: "Contact Us",
+    to: "/contact",
   },
 ];
 </script>
@@ -57,17 +20,26 @@ const columns = [
 <template>
   <USeparator icon="i-simple-icons-nuxtdotjs" class="h-px" />
 
-  <UFooter :ui="{ top: 'border-b border-default' }">
-    <template #top>
-      <UContainer>
-        <UFooterColumns :columns="columns"> </UFooterColumns>
-      </UContainer>
-    </template>
-
+  <UFooter>
     <template #left>
       <p class="text-sm text-muted">
         TYC INTAKE • © {{ new Date().getFullYear() }} All Rights Reserved
       </p>
+    </template>
+
+    <UNavigationMenu :items="items" variant="link" />
+
+    <template #bottom>
+      <UContainer>
+        <p class="text-xs text-muted text-center">
+          The information on this website is for general information purposes
+          only. Nothing on this site should be taken as legal advice for any
+          individual case or situation. This information is not intended to
+          create, and receipt or viewing does not constitute, an attorney-client
+          relationship. This website may constitute attorney advertising. Prior
+          results do not guarantee a similar outcome.
+        </p>
+      </UContainer>
     </template>
   </UFooter>
 </template>
