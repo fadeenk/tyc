@@ -1,0 +1,29 @@
+﻿# tyc Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-10-22
+
+## Active Technologies
+
+- TypeScript 5.0+ (required by constitution) + Nuxt 4+, Nuxt UI v4, Supabase client (001-legal-intake-website)
+
+## Project Structure
+
+```text
+backend/
+frontend/
+```
+
+## Commands
+
+npm run lint
+
+## Code Style
+
+TypeScript 5.0+ (required by constitution): Follow standard conventions
+
+## Recent Changes
+
+- 001-legal-intake-website: Added TypeScript 5.0+ (required by constitution) + Nuxt 4+, Nuxt UI v4, Supabase client
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
