@@ -8,6 +8,14 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
   ],
 
+  // GitHub Pages configuration
+  ssr: false,
+  target: "static",
+
+  app: {
+    baseURL: "/",
+  },
+
   supabase: {
     url: "https://crdigodfxazwewymkdud.supabase.co",
     key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyZGlnb2RmeGF6d2V3eW1rZHVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMTUxNjYsImV4cCI6MjA3Njc5MTE2Nn0.WsntCzui77Jt3FRhY2VBpHnDXqrdNWXDqCopBdVvoL0",
@@ -32,6 +40,10 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: ["/"],
+      crawlLinks: true,
+    },
+    experimental: {
+      payloadExtraction: false,
     },
   },
 
