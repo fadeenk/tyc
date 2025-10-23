@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import IntakeForm from "../../components/IntakeForm.vue";
-import StickyCTA from "../components/StickyCTA.vue";
-const { data: page, pending } = await useAsyncData("index", () =>
-  queryCollection("content").first(),
-);
+import IntakeForm from '../../components/IntakeForm.vue'
+import StickyCTA from '../components/StickyCTA.vue'
+
+const { data: page, pending } = await useAsyncData('index', () =>
+  queryCollection('content').first()
+)
 
 // Watch for page data and set SEO meta when available
 watchEffect(() => {
@@ -12,32 +13,40 @@ watchEffect(() => {
       title: page.value.seo?.title || page.value.title,
       ogTitle: page.value.seo?.title || page.value.title,
       description: page.value.seo?.description || page.value.description,
-      ogDescription: page.value.seo?.description || page.value.description,
-    });
+      ogDescription: page.value.seo?.description || page.value.description
+    })
   }
-});
+})
 
 // Handle 404 if no page data
 if (!page.value && !pending.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: "Page not found",
-    fatal: true,
-  });
+    statusMessage: 'Page not found',
+    fatal: true
+  })
 }
 </script>
 
 <template>
-  <div v-if="pending" class="flex items-center justify-center min-h-screen">
+  <div
+    v-if="pending"
+    class="flex items-center justify-center min-h-screen"
+  >
     <div class="text-center">
       <div
         class="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"
       />
-      <p class="mt-4 text-muted">Loading...</p>
+      <p class="mt-4 text-muted">
+        Loading...
+      </p>
     </div>
   </div>
 
-  <div v-else-if="page" class="relative">
+  <div
+    v-else-if="page"
+    class="relative"
+  >
     <div class="hidden lg:block">
       <UColorModeImage
         light="/images/light/line-1.svg"
@@ -51,7 +60,7 @@ if (!page.value && !pending.value) {
       :links="page.hero.links"
       :ui="{
         container: 'md:pt-18 lg:pt-20',
-        title: 'max-w-3xl mx-auto',
+        title: 'max-w-3xl mx-auto'
       }"
     >
       <template #top>
@@ -59,7 +68,10 @@ if (!page.value && !pending.value) {
       </template>
 
       <template #title>
-        <MDC :value="page.title" unwrap="p" />
+        <MDC
+          :value="page.title"
+          unwrap="p"
+        />
       </template>
     </UPageHero>
 
@@ -70,23 +82,26 @@ if (!page.value && !pending.value) {
       orientation="horizontal"
       :ui="{
         container: 'lg:px-0 2xl:px-20 mx-0 max-w-none md:mr-10',
-        features: 'gap-0',
+        features: 'gap-0'
       }"
       reverse
     >
       <template #title>
-        <MDC :value="page.section.title" class="sm:*:leading-11" />
+        <MDC
+          :value="page.section.title"
+          class="sm:*:leading-11"
+        />
       </template>
       <img
         :src="page.section.images.desktop"
         :alt="page.section.title"
         class="hidden lg:block 2xl:hidden left-0 w-full max-w-2xl"
-      />
+      >
       <img
         :src="page.section.images.mobile"
         :alt="page.section.title"
         class="block lg:hidden 2xl:block 2xl:w-full 2xl:max-w-2xl"
-      />
+      >
     </UPageSection>
 
     <USeparator :ui="{ border: 'border-primary/30' }" />
@@ -113,7 +128,10 @@ if (!page.value && !pending.value) {
         <div
           class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200 px-4 py-2 rounded-full text-sm font-medium"
         >
-          <UIcon name="i-lucide-zap" class="w-4 h-4" />
+          <UIcon
+            name="i-lucide-zap"
+            class="w-4 h-4"
+          />
           Most cases reviewed within 24 hours
         </div>
       </template>
@@ -129,7 +147,7 @@ if (!page.value && !pending.value) {
       :features="page.features.features"
       :ui="{
         title: 'text-left @container relative flex',
-        description: 'text-left',
+        description: 'text-left'
       }"
       class="relative overflow-hidden"
     >
@@ -140,7 +158,10 @@ if (!page.value && !pending.value) {
         class="absolute rounded-full -right-10 -bottom-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]"
       />
       <template #title>
-        <MDC :value="page.features.title" class="*:leading-9" />
+        <MDC
+          :value="page.features.title"
+          class="*:leading-9"
+        />
         <div class="hidden @min-[1020px]:block">
           <UColorModeImage
             light="/images/light/line-2.svg"
@@ -191,25 +212,33 @@ if (!page.value && !pending.value) {
       <UContainer>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           <div>
-            <div class="text-4xl font-bold text-primary mb-2">$50M+</div>
+            <div class="text-4xl font-bold text-primary mb-2">
+              $50M+
+            </div>
             <div class="text-gray-600 dark:text-gray-300">
               Total Compensation Recovered
             </div>
           </div>
           <div>
-            <div class="text-4xl font-bold text-primary mb-2">2,500+</div>
+            <div class="text-4xl font-bold text-primary mb-2">
+              2,500+
+            </div>
             <div class="text-gray-600 dark:text-gray-300">
               Cases Successfully Resolved
             </div>
           </div>
           <div>
-            <div class="text-4xl font-bold text-primary mb-2">95%</div>
+            <div class="text-4xl font-bold text-primary mb-2">
+              95%
+            </div>
             <div class="text-gray-600 dark:text-gray-300">
               Client Satisfaction Rate
             </div>
           </div>
           <div>
-            <div class="text-4xl font-bold text-primary mb-2">24/7</div>
+            <div class="text-4xl font-bold text-primary mb-2">
+              24/7
+            </div>
             <div class="text-gray-600 dark:text-gray-300">
               Client Support Available
             </div>
@@ -219,7 +248,12 @@ if (!page.value && !pending.value) {
       <!-- CTA after Success Stats -->
       <UContainer>
         <div class="text-center">
-          <UButton to="#intake-form" size="xl" color="primary" class="px-8">
+          <UButton
+            to="#intake-form"
+            size="xl"
+            color="primary"
+            class="px-8"
+          >
             <template #leading>
               <UIcon name="i-lucide-arrow-right" />
             </template>
@@ -239,7 +273,7 @@ if (!page.value && !pending.value) {
       :items="page.testimonials.items"
       :ui="{
         title: 'text-left @container relative flex',
-        description: 'text-left',
+        description: 'text-left'
       }"
     >
       <template #title>
@@ -262,11 +296,14 @@ if (!page.value && !pending.value) {
             :description="testimonial.quote"
             :ui="{
               description:
-                'before:content-[open-quote] after:content-[close-quote]',
+                'before:content-[open-quote] after:content-[close-quote]'
             }"
           >
             <template #footer>
-              <UUser v-bind="testimonial.user" size="xl" />
+              <UUser
+                v-bind="testimonial.user"
+                size="xl"
+              />
             </template>
           </UPageCard>
         </UPageColumns>

@@ -1,108 +1,108 @@
 <script setup lang="ts">
-import { reactive } from "vue";
-import { z } from "zod";
-import type { FormSubmitEvent } from "@nuxt/ui";
+import { reactive } from 'vue'
+import { z } from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
 import {
   useIntakeForm,
-  type IntakeFormData,
-} from "../composables/useIntakeForm";
-import { vMaska } from "maska/vue";
+  type IntakeFormData
+} from '../composables/useIntakeForm'
+import { vMaska } from 'maska/vue'
 
 // Data cleanup helper functions
 const cleanText = (text: string) => {
-  return text.trim().replace(/\s+/g, " ");
-};
+  return text.trim().replace(/\s+/g, ' ')
+}
 
 const cleanPhone = (phone: string) => {
-  return phone.replace(/\D/g, ""); // Remove all non-digits
-};
+  return phone.replace(/\D/g, '') // Remove all non-digits
+}
 
 const validatePhone = (phone: string) => {
-  const cleaned = cleanPhone(phone);
-  return cleaned.length === 10 || cleaned.length === 11;
-};
+  const cleaned = cleanPhone(phone)
+  return cleaned.length === 10 || cleaned.length === 11
+}
 
 // Form validation schema with enhanced validation
 const schema = z.object({
   first_name: z
     .string()
-    .min(1, "First name is required")
-    .max(255, "First name is too long")
+    .min(1, 'First name is required')
+    .max(255, 'First name is too long')
     .transform(cleanText),
   last_name: z
     .string()
-    .min(1, "Last name is required")
-    .max(255, "Last name is too long")
+    .min(1, 'Last name is required')
+    .max(255, 'Last name is too long')
     .transform(cleanText),
   email: z
     .string()
-    .min(1, "Email is required")
-    .email("Invalid email address")
-    .max(255, "Email is too long")
-    .transform((email) => email.toLowerCase().trim()),
+    .min(1, 'Email is required')
+    .email('Invalid email address')
+    .max(255, 'Email is too long')
+    .transform(email => email.toLowerCase().trim()),
   phone: z
     .string()
-    .min(1, "Phone number is required")
-    .refine(validatePhone, "Please enter a valid 10-digit phone number")
+    .min(1, 'Phone number is required')
+    .refine(validatePhone, 'Please enter a valid 10-digit phone number')
     .transform(cleanPhone),
-  case_type: z.enum(["personal_injury", "consumer_protection", "other"], {
-    errorMap: () => ({ message: "Please select a case type" }),
+  case_type: z.enum(['personal_injury', 'consumer_protection', 'other'], {
+    errorMap: () => ({ message: 'Please select a case type' })
   }),
   case_description: z
     .string()
-    .min(10, "Case description must be at least 10 characters")
-    .max(5000, "Case description is too long")
+    .min(10, 'Case description must be at least 10 characters')
+    .max(5000, 'Case description is too long')
     .transform(cleanText),
   incident_date: z
     .string()
     .optional()
     .refine((date) => {
-      if (!date) return true;
-      const parsedDate = new Date(date);
-      const today = new Date();
-      return parsedDate <= today;
-    }, "Incident date cannot be in the future"),
+      if (!date) return true
+      const parsedDate = new Date(date)
+      const today = new Date()
+      return parsedDate <= today
+    }, 'Incident date cannot be in the future'),
   location: z
     .string()
-    .min(1, "Location is required")
-    .max(255, "Location is too long")
+    .min(1, 'Location is required')
+    .max(255, 'Location is too long')
     .transform(cleanText),
-  urgency: z.enum(["low", "medium", "high"], {
-    errorMap: () => ({ message: "Please select urgency level" }),
-  }),
-});
+  urgency: z.enum(['low', 'medium', 'high'], {
+    errorMap: () => ({ message: 'Please select urgency level' })
+  })
+})
 
-type Schema = z.output<typeof schema>;
+type Schema = z.output<typeof schema>
 
 // Form state
 const state = reactive<Partial<Schema>>({
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone: "",
+  first_name: '',
+  last_name: '',
+  email: '',
+  phone: '',
   case_type: undefined,
-  case_description: "",
-  incident_date: "",
-  location: "",
-  urgency: undefined,
-});
+  case_description: '',
+  incident_date: '',
+  location: '',
+  urgency: undefined
+})
 
 // Case type options
 const caseTypeOptions = [
-  { label: "Personal Injury", value: "personal_injury" },
-  { label: "Consumer Protection", value: "consumer_protection" },
-  { label: "Other", value: "other" },
-];
+  { label: 'Personal Injury', value: 'personal_injury' },
+  { label: 'Consumer Protection', value: 'consumer_protection' },
+  { label: 'Other', value: 'other' }
+]
 
 // Urgency options
 const urgencyOptions = [
-  { label: "Low", value: "low" },
-  { label: "Medium", value: "medium" },
-  { label: "High", value: "high" },
-];
+  { label: 'Low', value: 'low' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'High', value: 'high' }
+]
 
 // Form submission
-const { submitIntakeForm } = useIntakeForm();
+const { submitIntakeForm } = useIntakeForm()
 
 // Data cleanup function that runs before submission
 const cleanupFormData = (data: Schema): IntakeFormData => {
@@ -115,30 +115,39 @@ const cleanupFormData = (data: Schema): IntakeFormData => {
     case_description: cleanText(data.case_description),
     incident_date: data.incident_date || undefined,
     location: data.location,
-    urgency: data.urgency,
-  };
-};
+    urgency: data.urgency
+  }
+}
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
   // Clean and validate data before submission
-  const cleanedData = cleanupFormData(event.data);
+  const cleanedData = cleanupFormData(event.data)
 
   // Create a new event with cleaned data
   const cleanedEvent = {
     ...event,
-    data: cleanedData,
-  } as FormSubmitEvent<IntakeFormData>;
+    data: cleanedData
+  } as FormSubmitEvent<IntakeFormData>
 
-  await submitIntakeForm(cleanedEvent);
-};
+  await submitIntakeForm(cleanedEvent)
+}
 </script>
 
 <template>
   <div class="max-w-5xl mx-auto">
-    <UForm :schema="schema" :state="state" class="space-y-6" @submit="onSubmit">
+    <UForm
+      :schema="schema"
+      :state="state"
+      class="space-y-6"
+      @submit="onSubmit"
+    >
       <!-- Personal Information -->
       <div class="form-grid">
-        <UFormField label="First Name" name="first_name" required>
+        <UFormField
+          label="First Name"
+          name="first_name"
+          required
+        >
           <UInput
             v-model="state.first_name"
             placeholder="Enter your first name"
@@ -147,7 +156,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           />
         </UFormField>
 
-        <UFormField label="Last Name" name="last_name" required>
+        <UFormField
+          label="Last Name"
+          name="last_name"
+          required
+        >
           <UInput
             v-model="state.last_name"
             placeholder="Enter your last name"
@@ -158,7 +171,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       </div>
 
       <div class="form-grid">
-        <UFormField label="Email Address" name="email" required>
+        <UFormField
+          label="Email Address"
+          name="email"
+          required
+        >
           <UInput
             v-model="state.email"
             type="email"
@@ -168,7 +185,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           />
         </UFormField>
 
-        <UFormField label="Phone Number" name="phone" required>
+        <UFormField
+          label="Phone Number"
+          name="phone"
+          required
+        >
           <UInput
             v-model="state.phone"
             v-maska="'(###) ###-####'"
@@ -177,8 +198,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             icon="i-lucide-phone"
             :ui="{
               input: {
-                base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400',
-              },
+                base: 'relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-400'
+              }
             }"
             class="w-full"
           />
@@ -187,7 +208,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
       <!-- Case Information -->
       <div class="form-grid">
-        <UFormField label="Case Type" name="case_type" required>
+        <UFormField
+          label="Case Type"
+          name="case_type"
+          required
+        >
           <USelect
             v-model="state.case_type"
             :items="caseTypeOptions"
@@ -197,7 +222,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           />
         </UFormField>
 
-        <UFormField label="Urgency Level" name="urgency" required>
+        <UFormField
+          label="Urgency Level"
+          name="urgency"
+          required
+        >
           <USelect
             v-model="state.urgency"
             :items="urgencyOptions"
@@ -232,7 +261,10 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
       <!-- Optional Information -->
       <div class="form-grid">
-        <UFormField label="Incident Date" name="incident_date">
+        <UFormField
+          label="Incident Date"
+          name="incident_date"
+        >
           <UInput
             v-model="state.incident_date"
             type="date"
@@ -241,7 +273,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           />
         </UFormField>
 
-        <UFormField label="Location" name="location" required>
+        <UFormField
+          label="Location"
+          name="location"
+          required
+        >
           <UInput
             v-model="state.location"
             placeholder="City, State"
@@ -259,11 +295,14 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           color="primary"
           class="w-full md:w-auto px-8 animate-pulse justify-center flex items-center"
           :ui="{
-            rounded: 'rounded-lg',
+            rounded: 'rounded-lg'
           }"
         >
           <span class="w-full text-center flex items-center justify-center">
-            <UIcon name="i-lucide-send" class="mr-2 w-4 h-4" />
+            <UIcon
+              name="i-lucide-send"
+              class="mr-2 w-4 h-4"
+            />
             <span class="text-sm"> Submit Your Case Now</span>
           </span>
         </UButton>
@@ -273,22 +312,36 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       <div class="text-center text-sm text-gray-500 dark:text-gray-400">
         <p>
           By submitting this form, you agree to our
-          <UButton variant="link" size="sm" to="/privacy"
-            >Privacy Policy</UButton
+          <UButton
+            variant="link"
+            size="sm"
+            to="/privacy"
           >
+            Privacy Policy
+          </UButton>
           and
-          <UButton variant="link" size="sm" to="/terms"
-            >Terms of Service</UButton
-          >.
+          <UButton
+            variant="link"
+            size="sm"
+            to="/terms"
+          >
+            Terms of Service
+          </UButton>.
         </p>
         <p class="mt-2">
-          <UIcon name="i-lucide-shield-check" class="inline mr-1" />
+          <UIcon
+            name="i-lucide-shield-check"
+            class="inline mr-1"
+          />
           Your information is secure and confidential.
         </p>
         <div
           class="mt-3 flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400"
         >
-          <UIcon name="i-lucide-lock" class="w-3 h-3" />
+          <UIcon
+            name="i-lucide-lock"
+            class="w-3 h-3"
+          />
           <span>256-bit SSL Encrypted</span>
         </div>
       </div>

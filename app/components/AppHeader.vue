@@ -1,34 +1,34 @@
 <script setup lang="ts">
-const nuxtApp = useNuxtApp();
-const { activeHeadings, updateHeadings } = useScrollspy();
+const nuxtApp = useNuxtApp()
+const { activeHeadings, updateHeadings } = useScrollspy()
 
 const items = computed(() => [
   {
-    label: "Process",
-    to: "#section",
-    active: activeHeadings.value.includes("section"),
+    label: 'Process',
+    to: '#section',
+    active: activeHeadings.value.includes('section')
   },
   {
-    label: "Benefits",
-    to: "#benefits",
-    active: activeHeadings.value.includes("benefits"),
+    label: 'Benefits',
+    to: '#benefits',
+    active: activeHeadings.value.includes('benefits')
   },
   {
-    label: "Testimonials",
-    to: "#testimonials",
-    active: activeHeadings.value.includes("testimonials"),
-  },
-]);
+    label: 'Testimonials',
+    to: '#testimonials',
+    active: activeHeadings.value.includes('testimonials')
+  }
+])
 
-nuxtApp.hooks.hookOnce("page:finish", () => {
+nuxtApp.hooks.hookOnce('page:finish', () => {
   updateHeadings(
     [
-      document.querySelector("#section"),
-      document.querySelector("#benefits"),
-      document.querySelector("#testimonials"),
-    ].filter(Boolean) as Element[],
-  );
-});
+      document.querySelector('#section'),
+      document.querySelector('#benefits'),
+      document.querySelector('#testimonials')
+    ].filter(Boolean) as Element[]
+  )
+})
 </script>
 
 <template>
@@ -40,7 +40,11 @@ nuxtApp.hooks.hookOnce("page:finish", () => {
     </template>
 
     <template #right>
-      <UNavigationMenu :items="items" variant="link" class="hidden lg:block" />
+      <UNavigationMenu
+        :items="items"
+        variant="link"
+        class="hidden lg:block"
+      />
 
       <UButton
         to="#intake-form"
@@ -53,7 +57,11 @@ nuxtApp.hooks.hookOnce("page:finish", () => {
     </template>
 
     <template #body>
-      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <UNavigationMenu
+        :items="items"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
       <UButton
         to="#intake-form"
         class="mt-4"

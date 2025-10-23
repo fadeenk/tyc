@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const items: NavigationMenuItem[] = [
   {
-    label: "Privacy Policy",
-    to: "/privacy-policy",
+    label: 'Privacy Policy',
+    to: '/privacy-policy'
   },
   {
-    label: "Terms of Service",
-    to: "/terms-of-service",
+    label: 'Terms of Service',
+    to: '/terms-of-service'
   },
   {
-    label: "Contact Us",
-    to: "/contact",
-  },
-];
+    label: 'Contact Us',
+    to: '/contact'
+  }
+]
 </script>
 
 <template>
-  <USeparator icon="i-simple-icons-nuxtdotjs" class="h-px" />
+  <USeparator
+    icon="i-simple-icons-nuxtdotjs"
+    class="h-px"
+  />
 
   <UFooter>
     <template #left>
@@ -27,7 +30,10 @@ const items: NavigationMenuItem[] = [
       </p>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <UNavigationMenu
+      :items="items"
+      variant="link"
+    />
 
     <template #bottom>
       <UContainer>

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-const isVisible = ref(false);
+const isVisible = ref(false)
 
 onMounted(() => {
   const handleScroll = () => {
-    const heroHeight = 600; // Approximate hero section height
-    isVisible.value = window.scrollY > heroHeight;
-  };
+    const heroHeight = 600 // Approximate hero section height
+    isVisible.value = window.scrollY > heroHeight
+  }
 
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener('scroll', handleScroll)
 
   onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll);
-  });
-});
+    window.removeEventListener('scroll', handleScroll)
+  })
+})
 </script>
 
 <template>
@@ -24,7 +24,10 @@ onMounted(() => {
     leave-from-class="opacity-100 translate-y-0"
     leave-to-class="opacity-0 translate-y-4"
   >
-    <div v-if="isVisible" class="fixed bottom-6 right-6 z-50">
+    <div
+      v-if="isVisible"
+      class="fixed bottom-6 right-6 z-50"
+    >
       <UButton
         to="#intake-form"
         size="lg"
@@ -32,7 +35,7 @@ onMounted(() => {
         class="shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
         :ui="{
           rounded: 'rounded-full',
-          padding: 'px-6 py-3',
+          padding: 'px-6 py-3'
         }"
       >
         <template #leading>
