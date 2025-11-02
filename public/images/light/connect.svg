@@ -49,16 +49,16 @@
 </linearGradient>
 <linearGradient id="paint2_linear_3998_20858" x1="168.17" y1="69.8184" x2="168.17" y2="119.995" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FF6900"/>
-<stop offset="1" stop-color="#FF8904"/>
+<stop offset="1" stop-color="#ff0404"/>
 </linearGradient>
 <linearGradient id="paint3_linear_3998_20858" x1="168.261" y1="74.8665" x2="168.261" y2="115.532" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FF6900"/>
-<stop offset="1" stop-color="#FF8904"/>
+<stop offset="1" stop-color="#ff0404"/>
 </linearGradient>
 <linearGradient id="paint4_linear_3998_20858" x1="168.261" y1="74.8665" x2="168.261" y2="115.532" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FFD6A8"/>
 <stop offset="0.5" stop-color="#FFB86A"/>
-<stop offset="1" stop-color="#FF8904"/>
+<stop offset="1" stop-color="#ff0404"/>
 </linearGradient>
 <linearGradient id="paint5_linear_3998_20858" x1="111" y1="140.027" x2="111" y2="260.027" gradientUnits="userSpaceOnUse">
 <stop stop-color="#E5E5E5"/>

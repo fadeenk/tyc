@@ -21,8 +21,8 @@ section:
   title: "How the [Process]{.text-primary} Works"
   description: From case submission to compensation, we guide you through every step of your legal journey with qualified lawyers.
   images:
-    mobile: "/images/macbook-mobile.svg"
-    desktop: "/images/macbook.svg"
+    mobile: "/images/library.jpeg"
+    desktop: "/images/library.jpeg"
   features:
     - title: Submit Your Case
       description: Tell us about your situation through our secure intake form. Provide details about your case, it takes just 5 minutes and is completely confidential.
