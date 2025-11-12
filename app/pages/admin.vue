@@ -48,6 +48,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import type { Session, User } from "@supabase/supabase-js";
+import type { Database } from "~/types/database.types";
 
 const supabase = useSupabaseClient<Database>();
 
@@ -61,10 +62,8 @@ const filter = ref("");
 interface IntakeSubmission {
   id: string;
   created_at: string;
-  name: string;
   email: string;
   phone: string;
-  details: string;
   status: string;
   [key: string]: string;
 }
