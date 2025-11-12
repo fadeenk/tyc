@@ -27,6 +27,7 @@ ALTER TABLE intake_submissions ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policy: Allow public to insert new submissions
 CREATE POLICY "Allow public insert" ON intake_submissions
+  to authenticated, anon
   FOR INSERT WITH CHECK (true);
 
 -- Create updated_at trigger function
